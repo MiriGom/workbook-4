@@ -1,11 +1,18 @@
 package com.pluralsight;
 
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+
 public class Employee {
     private int employeeId;
     private String name;
     private String department;
     private double payRate;
     private int hoursWorked;
+    private double punchInTime;
+    private double punchOutTime;
 
     Employee(int employeeId, String name, String department, double payRate, int hoursWorked) {
         this.employeeId = employeeId;
@@ -14,6 +21,7 @@ public class Employee {
         this.payRate = payRate;
         this.hoursWorked = hoursWorked;
     }
+
     public int getEmployeeId() {
         return employeeId;
     }
@@ -53,19 +61,49 @@ public class Employee {
     public void setHoursWorked(int hoursWorked) {
         this.hoursWorked = hoursWorked;
     }
-    public void getTotalPay() {
-       double totalPay = getHoursWorked() + getPayRate();
+
+    public void punchIn(double time) {
+        this.punchInTime = time;
+        System.out.println(name = "punched in at: " + time);
     }
-    public int getRegularHours(){
+
+    public void punchOut(double time) {
+        this.punchOutTime = time;
+        System.out.println(name + "punched out at " + time);
+    }
+
+    public void calculateHoursWorked() {
+        if (punchOutTime > punchInTime) {
+            this.hoursWorked += (int) (punchOutTime - punchInTime);
+            ;
+        }
+    }
+
+    public double getTotalPay() {
+        return (getRegularHours() * getPayRate()) + (getOverTimeHours() * (payRate * 1.5));
+    }
+
+    public int getRegularHours() {
         if (hoursWorked <= 40) {
             return hoursWorked;
         }
-        return 0;
+        return 40;
     }
-    public int getOverTimeHours(){
-        if (hoursWorked > 40) {
-            int overTime = hoursWorked - 40;
-        }return 0;
+
+    public int getOverTimeHours() {
+        return hoursWorked - 40;
+    }
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "employeeId=" + employeeId +
+                ", name='" + name + '\'' +
+                ", department='" + department + '\'' +
+                ", payRate=" + payRate +
+                ", hoursWorked=" + hoursWorked +
+                ", punchInTime=" + punchInTime +
+                ", punchOutTime=" + punchOutTime +
+                '}';
     }
 }
-

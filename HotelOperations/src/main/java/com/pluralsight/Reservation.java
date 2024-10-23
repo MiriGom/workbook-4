@@ -5,37 +5,21 @@ import java.time.LocalDate;
 public class Reservation {
     private String guestName;
     private Room room;
-    private LocalDate checkInDate;
-    private LocalDate checkOutDate;
-    private boolean confirmed;
-    private String roomType;
-    private double roomPrice;
+    //private LocalDate checkInDate;
+    //private LocalDate checkOutDate;
     private int numberOfNights;
     private boolean weekend;
+    //private
 
-    Reservation(String roomType, double roomPrice, int numberOfNights, boolean weekend) {
-        this.roomType = roomType;
-        this.roomPrice = roomPrice;
+    Reservation(String guestName, Room room, int numberOfNights, boolean weekend) {
+        this.guestName = guestName;
+        this.room = room;
+        //this.checkInDate = checkInDate;
+        //this.checkOutDate = checkOutDate;
+        //this.roomPrice = room;
         this.numberOfNights = numberOfNights;
         this.weekend = weekend;
-    }
 
-    public String getRoomType() {
-        return roomType;
-    }
-    public void setRoomType(String roomType) {
-        this.roomType = roomType;
-    }
-    public double getRoomPrice(){
-        if (roomType == "king") {
-            roomPrice = 139.00;
-        } else if (roomType == "double") {
-            roomPrice = 124.00;
-        }
-        return roomPrice;
-    }
-    public void setRoomPrice(double roomPrice){
-        this.roomPrice = roomPrice;
     }
     public int getNumberOfNights() {
         return this.numberOfNights;
@@ -54,5 +38,17 @@ public class Reservation {
         return ;
     }
 
-
+    @Override
+    public String toString() {
+        return "Reservation{" +
+                "guestName='" + guestName + '\'' +
+                ", room=" + room +
+              //  ", checkInDate=" + checkInDate +
+              //  ", checkOutDate=" + checkOutDate +
+              //  ", confirmed=" + confirmed +
+                ", roomPrice=" + room.getPrice() +
+                ", numberOfNights=" + numberOfNights +
+                ", weekend=" + weekend +
+                '}';
+    }
 }
