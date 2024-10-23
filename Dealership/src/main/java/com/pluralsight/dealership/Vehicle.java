@@ -1,4 +1,5 @@
 package com.pluralsight.dealership;
+
 //class name and its declared private variables
 public class Vehicle {
     private int vin;
@@ -71,5 +72,11 @@ public class Vehicle {
     }
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Vin: %d, Year: %d, Model: %s, Make: %s, Color: %s, Car Type: %s, Odometer: %d, Price: %.2f\n",
+                getVin(), getYear(), getModel(), getMake(), getColor(), getVehicleType(), getOdometer(), getPrice());
     }
 }
