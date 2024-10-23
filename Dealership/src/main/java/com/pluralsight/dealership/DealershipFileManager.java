@@ -8,26 +8,28 @@ import java.util.List;
 
 public class DealershipFileManager {
 
-    public static void getDealership() {
+    public static List<Vehicle> getDealership() {
         //reference the List from another class
         List<Vehicle> inventory = new ArrayList<>();
+        List<Dealership> saveDealership = new ArrayList<>();
         // saving path into string variable so the fileWriter can read it as a string
         String filePath = "C:\\pluralsight\\workbook-4\\Dealership\\inventory.csv";
         try (FileReader fileReader = new FileReader(filePath);
              BufferedReader bufReader = new BufferedReader(fileReader)) {
             //create an array to separate the data in the csv
 
-            String line;
-            while ((line = bufReader.readLine()) != null) {
-                String [] dataArray = line.split("\\|");
+            String csvLine;
+            while ((csvLine = bufReader.readLine()) != null) {
+                String [] dataArray = csvLine.split("\\|");
                 if (dataArray.length < 4) {
                     String name = dataArray[0];
                     String address = dataArray[1];
                     String phone = dataArray[2];
 
                     Dealership dealership = new Dealership(name, address, phone);
+                    saveDealership.add(dealership);
 
-                } else if (dataArray.length < 9) {
+                } else if (dataArray.length >= 9) {
 
                     int vin;
                     try {
@@ -73,6 +75,6 @@ public class DealershipFileManager {
         } catch (IOException e) {
             e.printStackTrace();//handle exceptions ( e.g., file not found)
         }
-
+        return inventory;
     }
 }
