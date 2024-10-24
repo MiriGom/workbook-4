@@ -1,9 +1,9 @@
 package com.pluralsight.dealership;
+import com.pluralsight.dealership.UserInterface;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import static com.pluralsight.dealership.DealershipFileManager.getDealership;
 
 public class Program {
     static Scanner scan = new Scanner(System.in);
@@ -14,12 +14,9 @@ public class Program {
         System.out.println("Press Enter");
        String enterPressed = scan.nextLine();
 
-       boolean isRunning = false;
-       if (enterPressed.isEmpty()) {
-           isRunning = true;
-       }
+       boolean isRunning = true;
        while (isRunning) {
-           userInterface();
+           uInterface.userInterface();
            break;
        }
     }

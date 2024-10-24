@@ -1,19 +1,19 @@
 package com.pluralsight.dealership;
 import java.util.ArrayList;
+import java.util.List;
+
 //Class and declared private variables
 public class Dealership {
     private String name;
     private String address;
     private String phone;
-    private final ArrayList<Vehicle> inventory;
+    private ArrayList<Vehicle> inventory = new ArrayList<>();
 
     //Main constructor
     Dealership(String name, String address, String phone){
         this.name = name;
         this.address = address;
         this.phone = phone;
-        //don't forget to initialize the arrayList with "new"
-        this.inventory = new ArrayList<Vehicle>();
     }
 
     //Getters
@@ -45,30 +45,57 @@ public class Dealership {
     }
 
     //methods
-    public void getVehiclesByPrice(){
+    public List<Vehicle> getVehiclesByPrice(double min, double max){
+        List<Vehicle> filteredList = new ArrayList<>();
+        for (Vehicle v : inventory) {
+            if (v.getPrice() > min && v.getPrice() < max) {
+                filteredList.add(v);
+            }
+        }
+        return filteredList;
     }
-    public void getVehiclesByMakeModel() {
+
+    public List<Vehicle> getVehiclesByMakeModel(String make, String model) {
+        List<Vehicle> filteredList = new ArrayList<>();
+        for (Vehicle v : inventory) {
+            if (v.getMake().equalsIgnoreCase(make) && v.getModel().equalsIgnoreCase(model)) {
+                filteredList.add(v);
+            }
+        }
+        return filteredList;
+    }
+    public List<Vehicle> getVehiclesByYear(int min, int max) {
+        List<Vehicle> filteredList = new ArrayList<>();
+        for (Vehicle v : inventory){
+            if (v.getYear() > min && v.getYear() < max) {
+                filteredList.add(v);
+            }
+        }
+        return filteredList;
+    }
+    public List<Vehicle> getVehiclesByColor(String color) {
+        List<Vehicle> filteredList = new ArrayList<>();
+        for (Vehicle v : inventory) {
+            if (v.getColor().equalsIgnoreCase(color)){
+                filteredList.add(v);
+            }
+        }
+        return filteredList;
+    }
+    public void getVehiclesByMileage(int min, int max){
 
     }
-    public void getVehiclesByYear() {
+    public void getVehiclesByType(String vehicleType){
 
     }
-    public void getVehiclesByColor() {
+    public List<Vehicle> getAllVehicles(){
+        return inventory;
+    }
+    public void addVehicle(Vehicle v) {
+        inventory.add(v);
 
     }
-    public void getVehiclesByMileage(){
-
-    }
-    public void getVehiclesByType(){
-
-    }
-    public void getAllVehicles(){
-
-    }
-    public void addVehicle() {
-
-    }
-    public void removeVehicle(){
-
+    public void removeVehicle(Vehicle v){
+        inventory.remove(v);
     }
 }

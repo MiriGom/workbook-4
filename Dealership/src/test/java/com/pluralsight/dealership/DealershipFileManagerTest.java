@@ -7,25 +7,30 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DealershipFileManager {
+class DealershipFileManagerTest {
+    public static void main(String[] args) {
+
+       try {
+           for (Vehicle vehicle : getVehicles()) {
+               System.out.println(vehicle);
+           }
+       } catch (IOException e)  {
+           System.out.println("file not found");
+       }
+
+    }
     static String filePath = "C:\\pluralsight\\workbook-4\\Dealership\\inventory.csv";
 
-    public Dealership getDealership() throws IOException {
-    Dealership dealership = new Dealership("", "", "");
-
-             BufferedReader bufReader = new BufferedReader(new FileReader(filePath));
+    public static List<Vehicle> getVehicles() throws IOException {
+        List<Vehicle> inventory = new ArrayList<>();
+         BufferedReader bufReader = new BufferedReader(new FileReader(filePath));
             //create an array to separate the data in the csv
 
             String csvLine;
             while ((csvLine = bufReader.readLine()) != null) {
                 String[] dataArray = csvLine.split("\\|");
-                if (dataArray.length == 3) {
-                    String name = dataArray[0];
-                    String address = dataArray[1];
-                    String phone = dataArray[2];
 
-                     dealership = new Dealership(name, address, phone);
-                } if (dataArray.length == 8) {
+                if (dataArray.length == 8) {
 
                     int vin;
                     try {
@@ -64,10 +69,11 @@ public class DealershipFileManager {
                         continue;
                     }
                     Vehicle vehicle = new Vehicle(vin, year, make, model, vehicleType, color, odometer, price);
-                    dealership.addVehicle(vehicle);
+                    inventory.add(vehicle);
                 }
             }bufReader.close();
 
-            return dealership;
-        }
+        return inventory;
+    }
+
 }
