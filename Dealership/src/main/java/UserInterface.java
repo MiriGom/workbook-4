@@ -1,6 +1,7 @@
 import com.pluralsight.dealership.DealershipFileManager;
 import com.pluralsight.dealership.Vehicle;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
@@ -30,39 +31,47 @@ public class UserInterface {
                     7) SEARCH WHOLE INVENTORY
                     
                     """);
-            int userCommand = scan.nextInt();
-            scan.nextLine();
-            switch (userCommand) {
-                case 1:
-                    processGetByPriceRequest();
-                    break;
-                case 2:
-                    processGetByMakeModelRequest();
-                    break;
-                case 3:
-                    processGetByYearRequest();
-                    break;
-                case 4:
-                    processGetByColorRequest();
-                    break;
-                case 5:
-                    processGetByMileageRequests();
-                    break;
-                case 6:
-                    processGetByVehicleTypeRequest();
-                    break;
-                case 7:
-                    processGetAllVehicleRequest();
-                    break;
+            //added try catch so that it tells you when you entered an invalid input.
+            try {
+                int userCommand = scan.nextInt();
+                scan.nextLine();
+                switch (userCommand) {
+                    case 1:
+                        processGetByPriceRequest();
+                        break;
+                    case 2:
+                        processGetByMakeModelRequest();
+                        break;
+                    case 3:
+                        processGetByYearRequest();
+                        break;
+                    case 4:
+                        processGetByColorRequest();
+                        break;
+                    case 5:
+                        processGetByMileageRequests();
+                        break;
+                    case 6:
+                        processGetByVehicleTypeRequest();
+                        break;
+                    case 7:
+                        processGetAllVehicleRequest();
+                        break;
+                }
+            }catch (InputMismatchException e) {
+                System.out.println("Invalid input, please enter a number.");
+                scan.nextLine();
             }
+
         }
+
 
 
     }
     private void init(){
-        DealershipFileManager manageFile = new DealershipFileManager();
-        inventory = DealershipFileManager.getDealership();
-
+        if (inventory == null) {
+            inventory = DealershipFileManager.getDealership();
+        }
     }
     public void processGetByPriceRequest() {
         for (Vehicle vehicle : inventory) {

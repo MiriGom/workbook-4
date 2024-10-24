@@ -10,6 +10,7 @@ public class Program {
     private static List<Vehicle> inventory;
 
     public static void main(String[] args){
+        UserInterface uInterface = new UserInterface();
         System.out.println("Press Enter");
        String enterPressed = scan.nextLine();
 
