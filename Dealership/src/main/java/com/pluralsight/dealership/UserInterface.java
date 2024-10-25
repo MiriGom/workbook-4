@@ -169,6 +169,20 @@ public class UserInterface {
         dealership.addVehicle(userVehicle);
     }
     public void processRemoveVehicleRequest(){
+        System.out.println("Enter vin of vehicle you want to remove");
+        int userVin = scan.nextInt();
+        scan.nextLine();
 
+        for (int i = 0; i < dealership.getAllVehicles().size(); i++) {
+            if (userVin == dealership.getAllVehicles().get(i).getVin()) {
+                System.out.println("Are you sure you want to remove " + dealership.getAllVehicles().get(i) + "?");
+                String userAnswer = scan.nextLine();
+
+                if (userAnswer.equalsIgnoreCase("yes")) {
+                   dealership.removeVehicle(dealership.getAllVehicles().get(i));
+                   System.out.println("Vehicle successfully removed :)");
+                }
+            }
+        }
     }
 }
