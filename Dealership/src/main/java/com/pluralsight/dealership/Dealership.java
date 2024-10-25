@@ -52,9 +52,11 @@ public class Dealership {
                 filteredList.add(v);
             }
         }
+        if (filteredList.isEmpty()) {
+            System.out.println("\nSorry no vehicles found");
+        }
         return filteredList;
     }
-
     public List<Vehicle> getVehiclesByMakeModel(String make, String model) {
         List<Vehicle> filteredList = new ArrayList<>();
         for (Vehicle v : inventory) {
@@ -62,14 +64,20 @@ public class Dealership {
                 filteredList.add(v);
             }
         }
+        if (filteredList.isEmpty()) {
+            System.out.println("\nSorry no vehicles found");
+        }
         return filteredList;
     }
     public List<Vehicle> getVehiclesByYear(int min, int max) {
         List<Vehicle> filteredList = new ArrayList<>();
         for (Vehicle v : inventory){
-            if (v.getYear() > min && v.getYear() < max) {
+            if (v.getYear() >= min && v.getYear() <= max) {
                 filteredList.add(v);
             }
+        }
+        if (filteredList.isEmpty()) {
+            System.out.println("\nSorry no vehicles found");
         }
         return filteredList;
     }
@@ -80,15 +88,39 @@ public class Dealership {
                 filteredList.add(v);
             }
         }
+        if (filteredList.isEmpty()) {
+            System.out.println("\nSorry no vehicles found");
+        }
         return filteredList;
     }
-    public void getVehiclesByMileage(int min, int max){
-
+    public List<Vehicle> getVehiclesByMileage(int min, int max){
+        List<Vehicle> filteredList = new ArrayList<>();
+        for (Vehicle v : inventory) {
+            if (v.getOdometer() > min && v.getOdometer() < max) {
+                filteredList.add(v);
+            }
+        }
+        if (filteredList.isEmpty()) {
+            System.out.println("\nSorry no vehicles found");
+        }
+        return filteredList;
     }
-    public void getVehiclesByType(String vehicleType){
-
+    public List<Vehicle> getVehiclesByType(String vehicleType){
+        List<Vehicle> filteredList = new ArrayList<>();
+        for (Vehicle v : inventory) {
+            if (v.getVehicleType().equalsIgnoreCase(vehicleType)) {
+                filteredList.add(v);
+            }
+        }
+        if (filteredList.isEmpty()) {
+            System.out.println("\nSorry no vehicles found");
+        }
+        return filteredList;
     }
     public List<Vehicle> getAllVehicles(){
+        if (inventory.isEmpty()) {
+            System.out.println("\nSorry no vehicles found");
+        }
         return inventory;
     }
     public void addVehicle(Vehicle v) {

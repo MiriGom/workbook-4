@@ -26,7 +26,8 @@ public class UserInterface {
                     5) SEARCH BY MILEAGE
                     6) SEARCH VEHICLE TYPE
                     7) SEARCH WHOLE INVENTORY
-                    
+                    8) ADD VEHICLE
+                    9) REMOVE VEHICLE
                     """);
             //added try catch so that it tells you when you entered an invalid input.
             try {
@@ -53,6 +54,12 @@ public class UserInterface {
                         break;
                     case 7:
                         processGetAllVehicleRequest();
+                        break;
+                    case 8:
+                        processAddVehicleRequest();
+                        break;
+                    case 9:
+                        processRemoveVehicleRequest();
                         break;
                 }
             }catch (InputMismatchException e) {
@@ -113,10 +120,22 @@ public class UserInterface {
             }
     }
     public void processGetByMileageRequests(){
-
+        System.out.println("Please enter a min mileage");
+        int minMileage = scan.nextInt();
+        scan.nextLine();
+        System.out.println("Please enter the max mileage");
+        int maxMileage  = scan.nextInt();
+        scan.nextLine();
+        for (Vehicle v : dealership.getVehiclesByMileage(minMileage, maxMileage)){
+            System.out.println(v);
+        }
     }
     public void processGetByVehicleTypeRequest(){
-
+        System.out.println("Please enter the type of vehicle you are looking for");
+        String vehicleType = scan.nextLine();
+        for (Vehicle v : dealership.getVehiclesByType(vehicleType)) {
+            System.out.println(v);
+        }
     }
     public void processGetAllVehicleRequest(){
 
@@ -125,7 +144,29 @@ public class UserInterface {
             }
     }
     public void processAddVehicleRequest(){
+        System.out.println("Please enter vin of vehicle");
+        int userVehicleVin = scan.nextInt();
+        scan.nextLine();
+        System.out.println("Please enter year of vehicle");
+        int userVehicleYear = scan.nextInt();
+        scan.nextLine();
+        System.out.println("Please enter make of vehicle");
+        String userVehicleMake = scan.nextLine();
+        System.out.println("Please enter model of vehicle");
+        String userVehicleModel = scan.nextLine();
+        System.out.println("Please enter color of vehicle");
+        String userVehicleColor = scan.nextLine();
+        System.out.println("Please enter type of vehicle");
+        String userVehicleType = scan.nextLine();
+        System.out.println("Please enter mileage of vehicle");
+        int userVehicleOdometer = scan.nextInt();
+        scan.nextLine();
+        System.out.println("Please enter price of vehicle");
+        double userVehiclePrice = scan.nextDouble();
+        scan.nextLine();
 
+        Vehicle userVehicle = new Vehicle(userVehicleVin, userVehicleYear, userVehicleMake, userVehicleModel, userVehicleType, userVehicleColor, userVehicleOdometer, userVehiclePrice);
+        dealership.addVehicle(userVehicle);
     }
     public void processRemoveVehicleRequest(){
 
