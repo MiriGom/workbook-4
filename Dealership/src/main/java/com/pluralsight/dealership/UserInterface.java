@@ -5,7 +5,6 @@ import java.util.*;
 
 public class UserInterface {
     Scanner scan = new Scanner(System.in);
-
     private Dealership dealership; //class variable to hold the list of Vehicles
     public void userInterface(){
         display();
@@ -29,7 +28,7 @@ public class UserInterface {
                     7) SEARCH WHOLE INVENTORY
                     8) ADD VEHICLE
                     9) REMOVE VEHICLE
-                    99) Quit
+                    99) Exit
                     """);
             //added try catch so that it tells you when you entered an invalid input.
             try {
@@ -64,12 +63,8 @@ public class UserInterface {
                         processRemoveVehicleRequest();
                         break;
                     case 99:
-<<<<<<< HEAD
+                        System.out.println("Bye Bye now");
                         isRunning =false;
-=======
-                        System.out.println("Bye Bye now!");
-                        isRunning = false;
->>>>>>> 2be35619e1cf2bb5a1ff074be35b745c6fffa690
                 }
             }catch (InputMismatchException e) {
                 System.out.println("Invalid input, please enter a number.");
@@ -153,6 +148,7 @@ public class UserInterface {
             }
     }
     public void processAddVehicleRequest(){
+        DealershipFileManager dealershipFileManager = new DealershipFileManager();
         System.out.println("Please enter vin of vehicle");
         int userVehicleVin = scan.nextInt();
         scan.nextLine();
@@ -176,6 +172,8 @@ public class UserInterface {
 
         Vehicle userVehicle = new Vehicle(userVehicleVin, userVehicleYear, userVehicleMake, userVehicleModel, userVehicleType, userVehicleColor, userVehicleOdometer, userVehiclePrice);
         dealership.addVehicle(userVehicle);
+        dealershipFileManager.saveDealership(dealership);
+
     }
     public void processRemoveVehicleRequest(){
         DealershipFileManager dealershipFileManager = new DealershipFileManager();
@@ -190,8 +188,9 @@ public class UserInterface {
 
                 if (userAnswer.equalsIgnoreCase("yes")) {
                    dealership.removeVehicle(dealership.getAllVehicles().get(i));
-                   dealershipFileManager.saveDealership(dealership);
                    System.out.println("Vehicle successfully removed :)");
+                   dealershipFileManager.saveDealership(dealership);
+
 
                 }
             }

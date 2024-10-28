@@ -72,7 +72,6 @@ public class DealershipFileManager {
             FileWriter writer = new FileWriter(filePath);
             BufferedWriter bufWriter = new BufferedWriter(writer);
 
-
             String dealershipToCsvLine;
             dealershipToCsvLine = String.format("%s|%s|%s\n", dealership.getName(), dealership.getAddress(), dealership.getPhone());
             bufWriter.write(dealershipToCsvLine);
@@ -82,8 +81,6 @@ public class DealershipFileManager {
                 vehicleToCsvLine = String.format("%d|%d|%s|%s|%s|%s|%d|%.2f\n", v.getVin(), v.getYear(), v.getMake(), v.getModel(), v.getColor(), v.getVehicleType(), v.getOdometer(), v.getPrice());
                 bufWriter.write(vehicleToCsvLine);
             }
-
-
             bufWriter.close();
         } catch (IOException e) {
 
