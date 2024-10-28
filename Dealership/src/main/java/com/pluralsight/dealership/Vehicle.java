@@ -76,7 +76,7 @@ public class Vehicle {
 
     @Override
     public String toString() {
-        return String.format("Vin:%-10d Year:%-10d Make:%s Model%-15s Color:%-10s Type:%-10s Odometer:%-10d Price:%.2f",
+        return String.format("Vin:%-10d Year:%-10d Make\\Model:%s %-10s Color:%-10s Type:%-10s Odometer:%-10d Price:$%.2f",
                 getVin(), getYear(), getMake(), getModel(), getColor(), getVehicleType(), getOdometer(), getPrice());
     }
 }

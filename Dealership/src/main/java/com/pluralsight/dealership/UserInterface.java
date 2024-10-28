@@ -5,6 +5,7 @@ import java.util.*;
 
 public class UserInterface {
     Scanner scan = new Scanner(System.in);
+
     private Dealership dealership; //class variable to hold the list of Vehicles
     public void userInterface(){
         display();
@@ -28,6 +29,7 @@ public class UserInterface {
                     7) SEARCH WHOLE INVENTORY
                     8) ADD VEHICLE
                     9) REMOVE VEHICLE
+                    99) Quit
                     """);
             //added try catch so that it tells you when you entered an invalid input.
             try {
@@ -62,7 +64,12 @@ public class UserInterface {
                         processRemoveVehicleRequest();
                         break;
                     case 99:
+<<<<<<< HEAD
                         isRunning =false;
+=======
+                        System.out.println("Bye Bye now!");
+                        isRunning = false;
+>>>>>>> 2be35619e1cf2bb5a1ff074be35b745c6fffa690
                 }
             }catch (InputMismatchException e) {
                 System.out.println("Invalid input, please enter a number.");
@@ -171,6 +178,7 @@ public class UserInterface {
         dealership.addVehicle(userVehicle);
     }
     public void processRemoveVehicleRequest(){
+        DealershipFileManager dealershipFileManager = new DealershipFileManager();
         System.out.println("Enter vin of vehicle you want to remove");
         int userVin = scan.nextInt();
         scan.nextLine();
@@ -182,7 +190,9 @@ public class UserInterface {
 
                 if (userAnswer.equalsIgnoreCase("yes")) {
                    dealership.removeVehicle(dealership.getAllVehicles().get(i));
+                   dealershipFileManager.saveDealership(dealership);
                    System.out.println("Vehicle successfully removed :)");
+
                 }
             }
         }
