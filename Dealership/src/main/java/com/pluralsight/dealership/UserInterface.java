@@ -61,6 +61,8 @@ public class UserInterface {
                     case 9:
                         processRemoveVehicleRequest();
                         break;
+                    case 99:
+                        isRunning =false;
                 }
             }catch (InputMismatchException e) {
                 System.out.println("Invalid input, please enter a number.");

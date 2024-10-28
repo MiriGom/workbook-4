@@ -17,7 +17,7 @@ public class Program {
        boolean isRunning = true;
        while (isRunning) {
            uInterface.userInterface();
-           break;
+           isRunning = false;
        }
     }
 
